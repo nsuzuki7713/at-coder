@@ -8,29 +8,17 @@ function Main(input) {
   let existing = false;
 
   loop:
-  for(let i = n; i >= 0; i--) {
+  for (let i = n; i>= 0; i--) {
     total = 10000 * i;
-    if (total > y) {
-      continue;
-    }
+    if(total > y) continue;
 
-    for(let j = n-i; j >= 0; j--) {
-      total = 10000 * i + 5000 * j;
-      if (total > y) {
-        continue;
-      }
-
-      for(let k = n - i - j; k >= 0; k--) {
-        if (!(i+j+k === n)) {
-          break;
-        }
-        total = 10000 * i + 5000 * j + 1000 * k;
-
-        if(total === y) {
-          console.log(`${i} ${j} ${k}`);
-          existing = true
-          break loop;
-        }
+    for (let j= n-i; j >= 0; j--){
+      let k = n - i - j;
+      total = 10000 * i + 5000 * j + 1000 * k;
+      if(total === y) {
+        console.log(`${i} ${j} ${k}`);
+        existing = true;
+        break loop;
       }
     }
   }
