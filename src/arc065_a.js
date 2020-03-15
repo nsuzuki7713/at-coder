@@ -2,33 +2,23 @@
 "use strict"
 function Main(input) {
   let s = input.split('\n')[0];
-  const target = ['dream', 'dreamer', 'erase', 'eraser'];
+  const reverseS = s.split('').reverse().join('');
+  const words = ['dream', 'dreamer', 'erase', 'eraser'].map(word => word.split('').reverse().join(''));
+  let index = 0;
 
   while(true) {
-    if (s === '') {
-      console.log('YES');
-      break;
-    }
+    const findS = words.find((word) => {
+      return reverseS.startsWith(word, index);
+    })
 
-    if(s.endsWith('dreamer')) {
-      s = s.slice(0, -7)
-    }
-    if(s.endsWith('dream')) {
-      s = s.slice(0, -5)
-      continue;
-    }
+    if (!findS) break;
+    index += findS.length
+  }
 
-    if(s.endsWith('eraser')) {
-      s = s.slice(0, -6)
-      continue;
-    }
-    if(s.endsWith('erase')) {
-      s = s.slice(0, -5)
-      continue;
-    }
-    console.log(s);
+  if(index === reverseS.length) {
+    console.log('YES');
+  } else {
     console.log('NO');
-    break;
   }
 }
 //*この行以降は編集しないでください（標準入出力から一度に読み込み、Mainを呼び出します）
