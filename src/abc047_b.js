@@ -9,29 +9,21 @@ function Main(input) {
 
   for (let i = 0; i < N; i++) {
     const [x, y, a] = points[i].trim().split(" ").map(Number);
+
+    let [jmin, jmax, kmin, kmax] = [0, 0, 0, 0];
     if (a === 1) {
-      for (let j = 0; j < x; j++) {
-        for (let k = 0; k < H; k++) {
-          field[j][k] = 0;
-        }
-      }
+      [jmin, jmax, kmin, kmax] = [0, x, 0, H];
     } else if (a === 2) {
-      for (let j = x; j < W; j++) {
-        for (let k = 0; k < H; k++) {
-          field[j][k] = 0;
-        }
-      }
+      [jmin, jmax, kmin, kmax] = [x, W, 0, H];
     } else if (a === 3) {
-      for (let j = 0; j < W; j++) {
-        for (let k = 0; k < y; k++) {
-          field[j][k] = 0;
-        }
-      }
+      [jmin, jmax, kmin, kmax] = [0, W, 0, y];
     } else if (a === 4) {
-      for (let j = 0; j < W; j++) {
-        for (let k = y; k < H; k++) {
-          field[j][k] = 0;
-        }
+      [jmin, jmax, kmin, kmax] = [0, W, y, H];
+    }
+
+    for (let j = jmin; j < jmax; j++) {
+      for (let k = kmin; k < kmax; k++) {
+        field[j][k] = 0;
       }
     }
   }
